@@ -13,6 +13,8 @@
 // library system call function. The saved user %esp points
 // to a saved program counter, and then the first argument.
 
+extern int sys_getpidcount(void); //<-- Changed this
+
 // Fetch the int at addr from process p.
 int
 fetchint(struct proc *p, uint addr, int *ip)
@@ -122,3 +124,4 @@ syscall(void)
     proc->tf->eax = -1;
   }
 }
+
