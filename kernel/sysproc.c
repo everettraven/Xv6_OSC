@@ -41,7 +41,7 @@ sys_kill(void)
 int
 sys_getpid(void)
 {
-  getpid_count++;
+  getpid_count = getpid_count + 1;
   return proc->pid;
 }
 

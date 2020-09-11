@@ -16,6 +16,6 @@ int main(int argc, char *argv[])
 
     // Use the pid variable so it doesn't throw an error    
     printf(1, "PID: %d\n", pid);
-    
+    pid_count = getpidcount();
     printf(1, "PID COUNT: %d\n", pid_count);
 }
