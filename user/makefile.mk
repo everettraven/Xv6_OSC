@@ -16,7 +16,8 @@ USER_PROGS := \
 	tester\
 	usertests\
 	wc\
-	zombie
+	zombie\
+	miniproject1_test #<-- Changed this
 
 USER_PROGS := $(addprefix user/, $(USER_PROGS))
 

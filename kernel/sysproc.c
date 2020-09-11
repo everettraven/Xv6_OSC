@@ -6,6 +6,9 @@
 #include "proc.h"
 #include "sysfunc.h"
 
+// Changed this
+extern int getpid_count = 0;
+
 int
 sys_fork(void)
 {
@@ -38,6 +41,7 @@ sys_kill(void)
 int
 sys_getpid(void)
 {
+  getpid_count++;
   return proc->pid;
 }
 
@@ -87,4 +91,11 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+//Changed this here
+int
+sys_getpidcount(void)
+{
+  return getpid_count;
 }
