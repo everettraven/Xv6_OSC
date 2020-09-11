@@ -15,8 +15,6 @@
 
 extern int sys_getpidcount(void); //<-- Changed this
 
-// Changed this
-extern int getpid_count;
 
 // Fetch the int at addr from process p.
 int

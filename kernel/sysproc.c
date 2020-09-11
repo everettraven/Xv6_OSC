@@ -6,7 +6,8 @@
 #include "proc.h"
 #include "sysfunc.h"
 
-
+// Changed this
+int getpid_count = 0;
 
 int
 sys_fork(void)
