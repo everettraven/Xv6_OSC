@@ -17,22 +17,22 @@ int main(int argc, char *argv[])
 
    if(child1 < 0 && child2 > 0)
    {
-        int i = 0;
+        int i;
         int pid = getpid();
         changetickets(pid, 3);
-        for(i; i < 10; i++)
+        for(i = 0; i < 10; i++)
         {
             printf(1,"I am child1 printing: %d", i);
         }
    }
    else if(child1 > 0 && child2 < 0)
    {
-        int i = 0;
+        int j;
         int pid = getpid();
         changetickets(pid, 100);
-        for(i; i < 10; i++)
+        for(j = 0; j < 10; j++)
         {
-            printf(1,"I am child2 printing: %d", i);
+            printf(1,"I am child2 printing: %d", j);
         }
    }
 
