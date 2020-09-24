@@ -474,6 +474,7 @@ int changetickets(int pid, int tickets)
     if(p->pid == pid)
     {
       p->tickets = tickets;
+      break;
     }
   }
   // release the ptable lock
