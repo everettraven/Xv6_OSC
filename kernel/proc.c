@@ -93,6 +93,7 @@ userinit(void)
   p->tf->eflags = FL_IF;
   p->tf->esp = PGSIZE;
   p->tf->eip = 0;  // beginning of initcode.S
+  p->tickets = DEFAULT_TICKETS;
 
   safestrcpy(p->name, "initcode", sizeof(p->name));
   p->cwd = namei("/");
@@ -256,6 +257,7 @@ void
 scheduler(void)
 {
   struct proc *p;
+  int seed = 123;
 
   for(;;){
     // Enable interrupts on this processor.
@@ -266,6 +268,23 @@ scheduler(void)
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
+
+
+      // Add the Lottery scheduling code here:
+      int total_tickets = totalTickets();
+      int rand_val = -1;
+
+      // get a random number
+      if(total_tickets > 0 || rand_val <= 0)
+      {
+        rand_val = random(total_tickets, seed);
+      }
+
+      // if the current process doesn't have enough tickets to run this then it is skipped
+      if(p->tickets < rand_val)
+      {
+        continue;
+      }
 
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
@@ -281,7 +300,6 @@ scheduler(void)
       proc = 0;
     }
     release(&ptable.lock);
-
   }
 }
 
@@ -441,6 +459,50 @@ procdump(void)
     }
     cprintf("\n");
   }
+}
+
+// Implement changetickets function
+int changetickets(int pid, int tickets)
+{
+  struct proc *p;
+
+  // lock the ptable so we can make changes
+  acquire(&ptable.lock);
+  // Look for the process with the specified  pid
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+  {
+    if(p->pid == pid)
+    {
+      p->tickets = tickets;
+    }
+  }
+  // release the ptable lock
+  release(&ptable.lock);
+
+  return pid;
+}
+
+// Implement my custom random function
+int random(int max, int seed)
+{
+  int a = 1103515245, c = 12345;
+
+  int X = a * seed + c;
+
+  return X % max;
+}
+
+// Get the total number of tickets
+int totalTickets()
+{
+  struct proc *p;
+  int tickets = 0;
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+  {
+    tickets += p->tickets;
+  }
+
+  return tickets;
 }
 
 

@@ -26,6 +26,7 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int getpidcount(void); //<-- Changed this
+int changetickets(void);
 
 // user library functions (ulib.c)
 int stat(char*, struct stat*);

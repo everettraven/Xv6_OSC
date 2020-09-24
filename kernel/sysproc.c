@@ -99,3 +99,20 @@ sys_getpidcount(void)
 {
   return getpid_count;
 }
+
+// implement the change tickets function
+int sys_changetickets(void)
+{
+  int pid, tickets;
+  if(argint(0, &pid) < 0)
+  {
+    return -1;
+  }
+
+  if(argint(1, &tickets) < 0)
+  {
+    return -1;
+  }
+
+  return changetickets(pid, tickets);
+}

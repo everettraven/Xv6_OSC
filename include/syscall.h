@@ -24,5 +24,6 @@
 #define SYS_sleep  20
 #define SYS_uptime 21
 #define SYS_getpidcount 22 //<-- Changed this
+#define SYS_changetickets 23 // Make a new system call so users can change number of tickets in a process
 
 #endif // _SYSCALL_H_

@@ -10,6 +10,8 @@
 #define SEG_TSS   6  // this process's task state
 #define NSEGS     7
 
+#define DEFAULT_TICKETS 1 // determine the number of tickets given to a process by default
+
 // Per-CPU state
 struct cpu {
   uchar id;                    // Local APIC ID; index into cpus[] below
@@ -74,6 +76,7 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
+  int tickets;                 // Number of tickets the process has (Changed this)
 };
 
 // Process memory is laid out contiguously, low addresses first:
@@ -81,5 +84,11 @@ struct proc {
 //   original data and bss
 //   fixed-size stack
 //   expandable heap
+
+// Create a function to generate random numbers
+int random(int max, int seed);
+
+// Create a function to get the total number of tickets
+int totalTickets();
 
 #endif // _PROC_H_

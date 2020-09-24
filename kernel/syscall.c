@@ -15,6 +15,9 @@
 
 extern int sys_getpidcount(void); //<-- Changed this
 
+// Add the change tickets prototype
+extern int sys_changetickets(void);
+
 
 // Fetch the int at addr from process p.
 int
@@ -107,6 +110,7 @@ static int (*syscalls[])(void) = {
 [SYS_write]   sys_write,
 [SYS_uptime]  sys_uptime,
 [SYS_getpidcount] sys_getpidcount, //<-- Changed this
+[SYS_changetickets] sys_changetickets, // Set this up for change tickets
 };
 
 // Called on a syscall trap. Checks that the syscall number (passed via eax)
