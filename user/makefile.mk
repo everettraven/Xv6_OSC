@@ -17,7 +17,7 @@ USER_PROGS := \
 	usertests\
 	wc\
 	zombie\
-	miniproject1_test\ #<-- Changed this
+	miniproject1_test\#<-- Changed this
 	miniproject2_test
 
 USER_PROGS := $(addprefix user/, $(USER_PROGS))
