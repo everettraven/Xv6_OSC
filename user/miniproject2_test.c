@@ -12,28 +12,28 @@ int main(int argc, char *argv[])
     child1 = fork();
     if (child1 > 0)
     {
-            child2 = fork();
+        child2 = fork();
     }
 
     if(child1 == 0 && child2 > 0)
     {
-            int i;
-            int pid = getpid();
-            changetickets(pid, 3);
-            for(i = 0; i < 10; i++)
-            {
-                printf(1,"I am child1 printing: %d", i);
-            }
+        int i;
+        int pid = getpid();
+        changetickets(pid, 1);
+        for(i = 0; i < 10; i++)
+        {
+            printf(1,"I am child1 printing: %d\n", i);
+        }
     }
     else if(child1 > 0 && child2 == 0)
     {
-            int j;
-            int pid = getpid();
-            changetickets(pid, 100);
-            for(j = 0; j < 10; j++)
-            {
-                printf(1,"I am child2 printing: %d", j);
-            }
+        int j;
+        int pid = getpid();
+        changetickets(pid, 1000);
+        for(j = 0; j < 10; j++)
+        {
+            printf(1,"I am child2 printing: %d\n", j);
+        }
     }
 
     else{
