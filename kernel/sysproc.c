@@ -100,6 +100,8 @@ sys_getpidcount(void)
   return getpid_count;
 }
 
+extern int changetickets(int, int);
+
 // implement the change tickets function
 int sys_changetickets(void)
 {
