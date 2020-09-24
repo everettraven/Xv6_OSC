@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
         changetickets(pid, 1);
         for(i = 0; i < 10; i++)
         {
-            printf(1,"I am child1 printing: %d\n", i);
+            printf(1,"%d\n", i);
         }
     }
     else if(child1 > 0 && child2 == 0)
@@ -30,9 +30,9 @@ int main(int argc, char *argv[])
         int j;
         int pid = getpid();
         changetickets(pid, 1000);
-        for(j = 0; j < 10; j++)
+        for(j = 10; j < 20; j++)
         {
-            printf(1,"I am child2 printing: %d\n", j);
+            printf(1,"%d\n", j);
         }
     }
 
