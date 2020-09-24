@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
             child2 = fork();
     }
 
-    if(child1 < 0 && child2 > 0)
+    if(child1 == 0 && child2 > 0)
     {
             int i;
             int pid = getpid();
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
                 printf(1,"I am child1 printing: %d", i);
             }
     }
-    else if(child1 > 0 && child2 < 0)
+    else if(child1 > 0 && child2 == 0)
     {
             int j;
             int pid = getpid();
