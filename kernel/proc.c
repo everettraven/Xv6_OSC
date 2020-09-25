@@ -286,7 +286,7 @@ scheduler(void)
         continue;
       }
 
-      printf(1, "Starting process: %d", p->pid);
+      cprintf("Starting process: %d", p->pid);
 
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
