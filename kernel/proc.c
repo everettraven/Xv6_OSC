@@ -277,7 +277,7 @@ scheduler(void)
       // get a random number
       if(total_tickets > 0 || rand_val <= 0)
       {
-        rand_val = random(total_tickets, seed);
+        rand_val = random(total_tickets + 1, seed);
       }
 
       // if the current process doesn't have enough tickets to run this then it is skipped
@@ -285,6 +285,8 @@ scheduler(void)
       {
         continue;
       }
+
+      printf(1, "Starting process: %d", p->pid);
 
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it

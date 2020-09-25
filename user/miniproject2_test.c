@@ -19,20 +19,22 @@ int main(int argc, char *argv[])
     {
         int i;
         int pid = getpid();
+        printf(1, "child 1 pid: %d", pid);
         changetickets(pid, 1);
-        for(i = 0; i < 10; i++)
+        for(i = 0; i < 1000; i++)
         {
-            printf(1,"%d\n", i);
+            // printf(1,"%d\n", i);
         }
     }
     else if(child1 > 0 && child2 == 0)
     {
         int j;
         int pid = getpid();
+        printf(1, "child 1 pid: %d", pid);
         changetickets(pid, 1000);
         for(j = 10; j < 20; j++)
         {
-            printf(1,"%d\n", j);
+            // printf(1,"%d\n", j);
         }
     }
 
