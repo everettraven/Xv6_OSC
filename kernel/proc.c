@@ -458,6 +458,7 @@ procdump(void)
       for(i=0; i<10 && pc[i] != 0; i++)
         cprintf(" %p", pc[i]);
     }
+    cprintf(" Num Tickets: %d", p->tickets);
     cprintf("\n");
   }
 }
