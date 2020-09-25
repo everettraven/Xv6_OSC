@@ -8,6 +8,10 @@
 int main(int argc, char *argv[])
 {
     int child1 = 1, child2 = 1;
+
+    int parent_pid = getpid();
+
+    printf(1, "Child 1 PID: %d\nChild 2 PID: %d", parent_pid + 1, parent_pid + 2);
     // Create two children to run the same task, but change their ticket counts
     child1 = fork();
     if (child1 > 0)
@@ -19,11 +23,10 @@ int main(int argc, char *argv[])
     {
         int i;
         int pid = getpid();
-        printf(1, "child 1 pid: %d", pid);
-        changetickets(pid, 1);
-        for(i = 0; i < 1000; i++)
+        changetickets(pid, 10);
+        for(i = 0; i < 10; i++)
         {
-            printf(1, "child1\n");
+            printf(1, "%d", getpid());
             // printf(1,"%d\n", i);
         }
     }
@@ -31,11 +34,10 @@ int main(int argc, char *argv[])
     {
         int j;
         int pid = getpid();
-        printf(1, "child 2 pid: %d", pid);
         changetickets(pid, 1000);
         for(j = 10; j < 20; j++)
         {
-            printf(1, "child2\n");
+            printf(1, "%d", getpid());
             // printf(1,"%d\n", j);
         }
     }
