@@ -257,36 +257,33 @@ void
 scheduler(void)
 {
   struct proc *p;
-  int seed = 123;
 
   for(;;){
     // Enable interrupts on this processor.
     sti();
 
+
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
+
+    int total_tickets = totalTickets();
+    int golden_ticket = random(total_tickets);
+
+
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
 
 
       // Add the Lottery scheduling code here:
-      int total_tickets = totalTickets();
-      int rand_val = -1;
 
-      // get a random number
-      if(total_tickets > 0 || rand_val <= 0)
-      {
-        rand_val = random(total_tickets + 1, seed);
-      }
 
       // if the current process doesn't have enough tickets to run this then it is skipped
-      if(p->tickets < rand_val)
+      if(p->tickets < golden_ticket)
       {
         continue;
       }
 
-      cprintf("Starting process: %d", p->pid);
 
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
@@ -300,7 +297,6 @@ scheduler(void)
       // Process is done running for now.
       // It should have changed its p->state before coming back.
       proc = 0;
-      seed++;
       break;
     }
     release(&ptable.lock);
@@ -488,14 +484,16 @@ int changetickets(int pid, int tickets)
   return pid;
 }
 
+unsigned long x = 1;
 // Implement my custom random function
-int random(int max, int seed)
+int random(int max)
 {
-  int a = 1103515245, c = 12345;
+  int a = 1103515245, b = 65536, c = 12345, d = 32768;
 
-  int X = a * seed + c;
+  x = x * a + c;
 
-  return X % max;
+  int rand = ((unsigned) (x/b) % d);
+  return rand % (max + 1);
 }
 
 // Get the total number of tickets
