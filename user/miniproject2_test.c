@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
         changetickets(pid, 1);
         for(i = 0; i < 1000; i++)
         {
+            printf(1, "child1\n");
             // printf(1,"%d\n", i);
         }
     }
@@ -30,10 +31,11 @@ int main(int argc, char *argv[])
     {
         int j;
         int pid = getpid();
-        printf(1, "child 1 pid: %d", pid);
+        printf(1, "child 2 pid: %d", pid);
         changetickets(pid, 1000);
         for(j = 10; j < 20; j++)
         {
+            printf(1, "child2\n");
             // printf(1,"%d\n", j);
         }
     }
