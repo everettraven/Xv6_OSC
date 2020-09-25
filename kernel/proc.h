@@ -86,7 +86,7 @@ struct proc {
 //   expandable heap
 
 // Create a function to generate random numbers
-int random(int max, int seed);
+int random(int max);
 
 // Create a function to get the total number of tickets
 int totalTickets();
